@@ -12,16 +12,18 @@ The application demonstrates these tasks:
     
 3. **Decode, modifiy and Encode**
 
-    Upon user command, the image will be decoded, converted and re-encoded to a new BitmapImage that will be displayed next to the original picture for comparison.
+    Upon user command, the image will be decoded, converted and displayed next to the original picture for comparison.
 
-4. **Save results**
-
-    User can save the grayscale image to disk.
 
 ## Formula
-The formula used for the color conversion is the following, as suggested by the [International Commission on Illumination](http://www.cie.co.at/index.php).
+The specific gray for pixel is calculated by assigning to each color their average:
 ```
-Luminance  =  0.2126 × Red  +  0.7152 × Green  +  0.0722 × Blue
+byte OldRed, OldGreen, OldBlue;
+byte Average = (OldRed + OldGreen + OldBlue) / 3;
+
+byte NewRed   = Average;
+byte NewGreen = Average;
+byte NewBlue  = Average;
 ```
 
 ## Requirements

@@ -47,9 +47,10 @@
                     Content="Convert"
                     Height="48"
                     Margin="0"
-                    IsEnabled="False"/>
+                    IsEnabled="False"
+                    Click="Convert_Click"/>
             <Button x:Name="SaveButton"
-                    Content="Convert"
+                    Content="Save result"
                     Height="48"
                     Margin="0"
                     IsEnabled="False"/>

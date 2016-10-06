@@ -44,8 +44,16 @@ namespace Grayscale_Converter
 			void Convert_Click(Platform::Object ^ sender, Windows::UI::Xaml::RoutedEventArgs ^ e);
 			void GetPicture();
 			void ConvertPicture();
+
+			Windows::Storage::StorageFile^ SelectedImageFile;
 			Windows::UI::Xaml::Media::Imaging::BitmapImage^ OriginalImageSource;
-			Windows::Graphics::Imaging::BitmapDecoder^ OriginalBitmap;
+			Windows::UI::Xaml::Media::Imaging::WriteableBitmap^ bitmap;
+			Platform::Array<byte>^ SourcePixels;
+			byte* DestinationPixels;
+			int width;
+			int height;
+			int xCenter;
+			int yCenter;
 
 		internal:
 			void NotifyUser(Platform::String^ strMessage, NotifyType type);

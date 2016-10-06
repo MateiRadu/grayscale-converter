@@ -20,27 +20,28 @@
 
 #include "pch.h"
 #include "MainPage.xaml.h"
+#include "Robuffer.h"
 
 using namespace Grayscale_Converter;
 
+
 using namespace concurrency;
+using namespace Microsoft::WRL;
 using namespace Platform;
 using namespace Windows::Foundation;
 using namespace Windows::Foundation::Collections;
+using namespace Windows::Graphics::Imaging;
 using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Controls::Primitives;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Media;
-using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::UI::Xaml::Media::Imaging;
-using namespace Windows::Storage::Pickers;
+using namespace Windows::UI::Xaml::Navigation;
 using namespace Windows::Storage;
+using namespace Windows::Storage::Pickers;
 using namespace Windows::Storage::Streams;
-using namespace Windows::Media;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 MainPage::MainPage()
 {
@@ -61,6 +62,7 @@ void MainPage::Convert_Click(Platform::Object^ sender, Windows::UI::Xaml::Routed
 
 void MainPage::GetPicture()
 {
+	// Prepare the file picker and the file type filters.
 	FileOpenPicker^ FilePicker = ref new FileOpenPicker();
 	FilePicker->ViewMode = PickerViewMode::Thumbnail;
 	FilePicker->SuggestedStartLocation = PickerLocationId::PicturesLibrary;
@@ -73,14 +75,19 @@ void MainPage::GetPicture()
 	{
 		if (file)
 		{
+			// Save the file for grayscale conversion.
+			SelectedImageFile = file;
+
 			create_task(file->OpenAsync(Windows::Storage::FileAccessMode::Read))
 				.then([this](IRandomAccessStream^ Stream)
 			{
+
+				// Create a new BitmapImage and set the file stream as source.
 				OriginalImageSource = ref new BitmapImage();
-				OriginalBitmap->CreateAsync(Stream);
 				OriginalImageSource->SetSourceAsync(Stream);
 				OriginalImage->Source = OriginalImageSource;
-				//ModifiedImage->Source = OriginalImageSource; //Layout testing
+
+				// Enable the conversion button and notify the user.
 				ConvertButton->IsEnabled = true;
 				NotifyUser("Photo selected. Ready to convert.", NotifyType::StatusMessage);
 		});
@@ -94,20 +101,78 @@ void MainPage::GetPicture()
 
 void MainPage::ConvertPicture()
 {
-	Array<unsigned char>^ NewPixels = ref new Array<unsigned char>{};
-	Array<unsigned char>^ Pixels;
-	create_task(OriginalBitmap->GetPixelDataAsync())
-		.then([&](Windows::Graphics::Imaging::PixelDataProvider^ PixelData)
+	// Notifiy the user that processing has begun.
+	NotifyUser("Processing...", NotifyType::StatusMessage);
+
+	RandomAccessStreamReference^ StreamFromFile = 
+		RandomAccessStreamReference::CreateFromFile(SelectedImageFile);
+
+	// From Stream create BitmapDecoder.
+	create_task(StreamFromFile->OpenReadAsync())
+		.then([this](IRandomAccessStreamWithContentType^ fileStream)
 	{
-		if (PixelData) {
-			Pixels = PixelData->DetachPixelData();
-			for (int i = 0; i < Pixels->Length; i++) {
-				// ???
-			}
-			//NewPixels to PixelDataProvider;
-			//PixelDataProvider to BitmapEncoder;
-		}
+		BitmapDecoder^ ImageDecoder;
+
+		// From BitmapDecoder create BitmapFrame.
+		create_task(ImageDecoder->CreateAsync(fileStream))
+			.then([this](BitmapDecoder^ decoder){
+			create_task(decoder->GetFrameAsync(0)).then([this](BitmapFrame^ BitFrame) {
+				// Get Width, Height and Center coordinates of the image.
+				width = BitFrame->PixelWidth;
+				height = BitFrame->PixelHeight;
+				xCenter = width / 2;
+				yCenter = height / 2;
+
+				// From BitmapFrame create PixelDataProvider.
+				create_task(BitFrame->GetPixelDataAsync()).then([this](PixelDataProvider^ pixelProvider)
+				{
+					// Get array of pixels.
+					SourcePixels = pixelProvider->DetachPixelData();
+
+					// Create the WriteableBitmap. 
+					bitmap = ref new WriteableBitmap(width, height);
+
+					// Set the bitmap to the Image element.
+					ModifiedImage->Source = bitmap;
+
+					// Get access to the pixels.
+					IBuffer^ buffer = bitmap->PixelBuffer;
+
+					// Obtain IBufferByteAccess.
+					ComPtr<IBufferByteAccess> pBufferByteAccess;
+					ComPtr<IUnknown> pBuffer((IUnknown*)buffer);
+					pBuffer.As(&pBufferByteAccess);
+
+					// Get pointer to pixel bytes.
+					pBufferByteAccess->Buffer(&DestinationPixels);
+
+					for (int yDestination = 0; yDestination < height; yDestination++)
+					{
+						for (int xDestination = 0; xDestination < width; xDestination++)
+						{
+							// Calculate the indexes.
+							// Since pixels won't be moved they share the same
+							// origins yDestination and xDestination.
+							int iDst = 4 * (yDestination * width + xDestination);
+							int iSrc = 4 * (yDestination * width + xDestination);
+
+							// Generate grayscale pixel color based on average RGB.
+							byte AveragePixel = (byte)((SourcePixels[iSrc++] + 
+								SourcePixels[iSrc++] + SourcePixels[iSrc++]) / 3);
+							
+							// Transfer the pixel bytes.
+							// Alpha channel is unchanged.
+							DestinationPixels[iDst++] = AveragePixel;		// Blue
+							DestinationPixels[iDst++] = AveragePixel;		// Green
+							DestinationPixels[iDst++] = AveragePixel;		// Red
+							DestinationPixels[iDst] = SourcePixels[iSrc];	// Alpha channel
+						}
+					}
+				});
+			});
+		});
 	});
+	NotifyUser("Done!", NotifyType::SuccessMessage);
 }
 
 void MainPage::NotifyUser(String^ strMessage, NotifyType type)
