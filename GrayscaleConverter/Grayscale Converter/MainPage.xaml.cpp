@@ -24,7 +24,6 @@
 
 using namespace Grayscale_Converter;
 
-
 using namespace concurrency;
 using namespace Microsoft::WRL;
 using namespace Platform;
@@ -81,7 +80,6 @@ void MainPage::GetPicture()
 			create_task(file->OpenAsync(Windows::Storage::FileAccessMode::Read))
 				.then([this](IRandomAccessStream^ Stream)
 			{
-
 				// Create a new BitmapImage and set the file stream as source.
 				OriginalImageSource = ref new BitmapImage();
 				OriginalImageSource->SetSourceAsync(Stream);
@@ -90,10 +88,12 @@ void MainPage::GetPicture()
 				// Enable the conversion button and notify the user.
 				ConvertButton->IsEnabled = true;
 				NotifyUser("Photo selected. Ready to convert.", NotifyType::StatusMessage);
-		});
-		}
-		else
-		{
+				
+				// Invalidate Modified Image if previously displayed.
+				BitmapImage^ EmptyImageSource = ref new BitmapImage();
+				ModifiedImage->Source = EmptyImageSource;
+			});
+		} else {
 			NotifyUser("Something went wrong. Retry", NotifyType::ErrorMessage);
 		}
 	});

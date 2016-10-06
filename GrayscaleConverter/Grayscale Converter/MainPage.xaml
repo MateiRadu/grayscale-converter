@@ -33,7 +33,7 @@
         <StackPanel x:Name="spHeader"
                     Background="{ThemeResource AppBarBackground}"
                     Height="48"
-                    Margin="-16"
+                    Margin="-16,-16,-16,0"
                     Orientation="Horizontal"
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
@@ -59,35 +59,41 @@
         <Grid RelativePanel.Below="spHeader"
               RelativePanel.Above="StatusLabelStack"
               RelativePanel.AlignLeftWithPanel="True"
-              RelativePanel.AlignRightWithPanel="True"
-              x:Name="MegaGrid">
+              RelativePanel.AlignRightWithPanel="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <!-- Original Image -->
-            <StackPanel Grid.Column="0"
-                        Margin="0,0,8,0"
-                        VerticalAlignment="Center"
-                        Orientation="Vertical">
-                <TextBlock Text="Original image"
-                           TextAlignment="Center"/>
-                <Image x:Name="OriginalImage"
-                       Stretch="UniformToFill"/>
-            </StackPanel>
+            <TextBlock Grid.Column="0"
+                       Grid.Row="0"
+                       Margin="0,8,0,0"
+                       Text="Original image"
+                       TextAlignment="Center"/>
+            <Image x:Name="OriginalImage"
+                       Grid.Column="0"
+                       Grid.Row="1"
+                       Margin="0,0,8,16"
+                       Stretch="Uniform"/>
             <!-- Modified Image -->
-            <StackPanel Grid.Column="1"
-                        Margin="8,0,0,0"
-                        VerticalAlignment="Center">
-                <TextBlock Text="Modified image"
-                           TextAlignment="Center"/>
-                <Image x:Name="ModifiedImage"
-                       Stretch="UniformToFill"/>
-            </StackPanel>
+            <TextBlock Grid.Column="1"
+                       Grid.Row="0"
+                       Margin="0,8,0,0"
+                       Text="Converted image"
+                       TextAlignment="Center"/>
+            <Image Grid.Column="1"
+                   Grid.Row="1"
+                   Margin="8,0,0,16"
+                   x:Name="ModifiedImage"
+                   Stretch="Uniform"/>
         </Grid>
         <!-- Status -->
         <StackPanel x:Name="StatusLabelStack"
-                    Margin="-16"
+                    Margin="-16,0,-16,-16"
                     Height="32"
                     Background="{ThemeResource AppBarBackground}"
                     RelativePanel.AlignBottomWithPanel="True"
