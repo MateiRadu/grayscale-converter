@@ -1,4 +1,24 @@
-﻿<Page
+﻿<!-- **************************************************************************
+  
+    Grayscale Converter, a simple color-to-grayscale UWP converter.
+    Copyright(C) 2016 Matei Bogdan Radu
+  
+    This program is free software : you can redistribute it and / or modify
+    it under the terms of the GNU General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or (at your
+    option) any later version.
+
+    This program is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+    or FITNESS FOR A PARTICULAR PURPOSE.See the GNU General Public License
+    for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this program. If not, see<http://www.gnu.org/licenses/> .
+  
+*************************************************************************** -->
+
+<Page
     x:Class="Grayscale_Converter.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,7 +27,74 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                   Padding="16">
+        <!-- Header -->
+        <StackPanel x:Name="spHeader"
+                    Background="{ThemeResource AppBarBackground}"
+                    Height="48"
+                    Margin="-16"
+                    Orientation="Horizontal"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True">
+            <Button x:Name="PickerButton"
+                    Content="Select a picture"
+                    Height="48"
+                    Margin="0"
+                    Click="Select_Picture_Click"/>
+            <Button x:Name="ConvertButton"
+                    Content="Convert"
+                    Height="48"
+                    Margin="0"
+                    IsEnabled="False"/>
+            <Button x:Name="SaveButton"
+                    Content="Convert"
+                    Height="48"
+                    Margin="0"
+                    IsEnabled="False"/>
+        </StackPanel>
+        <!-- Images -->
+        <Grid RelativePanel.Below="spHeader"
+              RelativePanel.Above="StatusLabelStack"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              x:Name="MegaGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Original Image -->
+            <StackPanel Grid.Column="0"
+                        Margin="0,0,8,0"
+                        VerticalAlignment="Center"
+                        Orientation="Vertical">
+                <TextBlock Text="Original image"
+                           TextAlignment="Center"/>
+                <Image x:Name="OriginalImage"
+                       Stretch="UniformToFill"/>
+            </StackPanel>
+            <!-- Modified Image -->
+            <StackPanel Grid.Column="1"
+                        Margin="8,0,0,0"
+                        VerticalAlignment="Center">
+                <TextBlock Text="Modified image"
+                           TextAlignment="Center"/>
+                <Image x:Name="ModifiedImage"
+                       Stretch="UniformToFill"/>
+            </StackPanel>
+        </Grid>
+        <!-- Status -->
+        <StackPanel x:Name="StatusLabelStack"
+                    Margin="-16"
+                    Height="32"
+                    Background="{ThemeResource AppBarBackground}"
+                    RelativePanel.AlignBottomWithPanel="True"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True">
+            <TextBlock x:Name="StatusLabel"
+                       TextAlignment="Left"
+                       Margin="8,4,0,0"/>
+        </StackPanel>
+    </RelativePanel>
 </Page>
