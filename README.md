@@ -14,6 +14,8 @@ The application demonstrates these tasks:
 
     Upon user command, the image will be decoded, converted and displayed next to the original picture for comparison.
 
+## Screenshot
+![Screenshot](https://github.com/MateiRadu/greyscale-converter/blob/master/Screenshots/W10Desktop.png)
 
 ## Formula
 The specific gray for pixel is calculated by assigning to each color their average:
@@ -25,6 +27,12 @@ byte NewRed   = Average;
 byte NewGreen = Average;
 byte NewBlue  = Average;
 ```
+
+## Future developments
+Some features would be nice to implement and I will eventually implement:
+- Drag n drop
+- Mobile optimized layout
+- Elapset time display
 
 ## Requirements
 In order to build and deploy the app, the following requirements must be met:
