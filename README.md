@@ -15,7 +15,7 @@ The application demonstrates these tasks:
     Upon user command, the image will be decoded, converted and displayed next to the original picture for comparison.
 
 ## Screenshot
-![Screenshot](https://github.com/MateiRadu/greyscale-converter/blob/master/Screenshots/W10Desktop.png)
+![Screenshot](https://github.com/MateiRadu/grayscale-converter/blob/master/Screenshots/W10Desktop.png)
 
 ## Formula
 The specific gray for pixel is calculated by assigning to each color their average:
