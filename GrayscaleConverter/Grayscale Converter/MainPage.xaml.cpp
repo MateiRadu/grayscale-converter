@@ -118,11 +118,10 @@ void MainPage::ConvertPicture()
 			.then([this](BitmapDecoder^ decoder){
 			create_task(decoder->GetFrameAsync(0)).then([this](BitmapFrame^ BitFrame) {
 				// Get Width, Height and Center coordinates of the image.
-				width = BitFrame->PixelWidth;
-				height = BitFrame->PixelHeight;
+				width = BitFrame->OrientedPixelWidth;
+				height = BitFrame->OrientedPixelHeight;
 				xCenter = width / 2;
 				yCenter = height / 2;
-
 				// From BitmapFrame create PixelDataProvider.
 				create_task(BitFrame->GetPixelDataAsync()).then([this](PixelDataProvider^ pixelProvider)
 				{
@@ -131,7 +130,6 @@ void MainPage::ConvertPicture()
 
 					// Create the WriteableBitmap. 
 					bitmap = ref new WriteableBitmap(width, height);
-
 					// Set the bitmap to the Image element.
 					ModifiedImage->Source = bitmap;
 
