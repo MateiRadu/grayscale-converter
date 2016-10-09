@@ -92,6 +92,8 @@ void MainPage::GetPicture()
 				// Invalidate Modified Image if previously displayed.
 				BitmapImage^ EmptyImageSource = ref new BitmapImage();
 				ModifiedImage->Source = EmptyImageSource;
+				SaveButton->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
+				ConvertButton->Visibility = Windows::UI::Xaml::Visibility::Visible;
 			});
 		} else {
 			NotifyUser("Something went wrong. Retry", NotifyType::ErrorMessage);
@@ -166,11 +168,13 @@ void MainPage::ConvertPicture()
 							DestinationPixels[iDst] = SourcePixels[iSrc];	// Alpha channel
 						}
 					}
+					NotifyUser("Done!", NotifyType::SuccessMessage);
+					SaveButton->Visibility = Windows::UI::Xaml::Visibility::Visible;
+					ConvertButton->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 				});
 			});
 		});
 	});
-	NotifyUser("Done!", NotifyType::SuccessMessage);
 }
 
 void MainPage::NotifyUser(String^ strMessage, NotifyType type)

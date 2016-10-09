@@ -29,9 +29,8 @@ byte NewBlue  = Average;
 ```
 
 ## Future developments
-Some features would be nice to implement and I will eventually implement:
+Some features would be nice to implement and I will eventually do:
 - Drag n drop
-- Mobile optimized layout
 - Elapset time display
 
 ## Requirements

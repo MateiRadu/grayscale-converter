@@ -100,6 +100,14 @@
                     Margin="4,0,0,0"
                     IsEnabled="False"
                     Click="Convert_Click"/>
+            <Button x:Name="SaveButton"
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    Content="Save result"
+                    Margin="4,0,0,0"
+                    IsEnabled="False"
+                    Visibility="Collapsed"
+                    Click="Convert_Click"/>
         </Grid>
         <!-- Status -->
         <StackPanel x:Name="StatusLabelStack"

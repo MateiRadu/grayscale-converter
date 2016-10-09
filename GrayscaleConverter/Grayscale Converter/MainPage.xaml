@@ -53,7 +53,8 @@
                     Content="Save result"
                     Height="48"
                     Margin="0"
-                    IsEnabled="False"/>
+                    IsEnabled="False"
+                    Visibility="Collapsed"/>
         </StackPanel>
         <!-- Images -->
         <Grid RelativePanel.Below="spHeader"
