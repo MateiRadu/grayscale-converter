@@ -31,7 +31,6 @@ byte NewBlue  = Average;
 ## Future developments
 Some features would be nice to implement and I will eventually do:
 - Drag n drop
-- Elapset time display
 
 ## Requirements
 In order to build and deploy the app, the following requirements must be met:

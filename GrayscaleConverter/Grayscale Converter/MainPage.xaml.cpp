@@ -21,6 +21,7 @@
 #include "pch.h"
 #include "MainPage.xaml.h"
 #include "Robuffer.h"
+#include <chrono>
 
 using namespace Grayscale_Converter;
 
@@ -105,7 +106,6 @@ void MainPage::ConvertPicture()
 {
 	// Notifiy the user that processing has begun.
 	NotifyUser("Processing...", NotifyType::StatusMessage);
-
 	RandomAccessStreamReference^ StreamFromFile = 
 		RandomAccessStreamReference::CreateFromFile(SelectedImageFile);
 
@@ -127,6 +127,9 @@ void MainPage::ConvertPicture()
 				// From BitmapFrame create PixelDataProvider.
 				create_task(BitFrame->GetPixelDataAsync()).then([this](PixelDataProvider^ pixelProvider)
 				{
+					// Get start timestamp.
+					auto start = std::chrono::high_resolution_clock::now();
+
 					// Get array of pixels.
 					SourcePixels = pixelProvider->DetachPixelData();
 
@@ -168,7 +171,14 @@ void MainPage::ConvertPicture()
 							DestinationPixels[iDst] = SourcePixels[iSrc];	// Alpha channel
 						}
 					}
-					NotifyUser("Done!", NotifyType::SuccessMessage);
+					// Get end timestamp and calculate difference.
+					auto finish = std::chrono::high_resolution_clock::now();
+					auto microseconds = std::chrono::duration_cast<std::chrono::microseconds>(finish - start);
+
+					// Convert microseconds to seconds.
+					double seconds = (double)microseconds.count() / 1000000;
+
+					NotifyUser("Done! Elapsed time: " + seconds.ToString() + " seconds.", NotifyType::SuccessMessage);
 					SaveButton->Visibility = Windows::UI::Xaml::Visibility::Visible;
 					ConvertButton->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 				});
