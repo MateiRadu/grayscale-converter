@@ -114,7 +114,6 @@ void MainPage::ConvertPicture()
 		.then([this](IRandomAccessStreamWithContentType^ fileStream)
 	{
 		BitmapDecoder^ ImageDecoder;
-
 		// From BitmapDecoder create BitmapFrame.
 		create_task(ImageDecoder->CreateAsync(fileStream))
 			.then([this](BitmapDecoder^ decoder){
@@ -125,7 +124,12 @@ void MainPage::ConvertPicture()
 				xCenter = width / 2;
 				yCenter = height / 2;
 				// From BitmapFrame create PixelDataProvider.
-				create_task(BitFrame->GetPixelDataAsync()).then([this](PixelDataProvider^ pixelProvider)
+				create_task(BitFrame->GetPixelDataAsync(
+					BitmapPixelFormat::Rgba8,
+					BitmapAlphaMode::Straight,
+					ref new BitmapTransform(),
+					ExifOrientationMode::RespectExifOrientation,
+					ColorManagementMode::ColorManageToSRgb)).then([this](PixelDataProvider^ pixelProvider)
 				{
 					// Get start timestamp.
 					auto start = std::chrono::high_resolution_clock::now();
