@@ -1,5 +1,4 @@
 # Grayscale Converter
-[![Development Status](https://img.shields.io/badge/development-active-brightgreen.svg)](#)
 
 A simple color-to-grayscale UWP C++ application.
 
