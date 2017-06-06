@@ -35,9 +35,9 @@ Some features would be nice to implement and I will eventually do:
 
 ## Requirements
 In order to build and deploy the app, the following requirements must be met:
-- Microsoft Visual Studio 2015 with Universal Windows App Development Tools
-- Target platform version: 10.0.14393
-- Target platform min. version: 10.0.10586
+- Microsoft Visual Studio 2017 with Universal Windows App Development Tools
+- Target platform version: 10.0.15063.0
+- Target platform min. version: 10.0.10586.0
 - A Windows 10 device
 
 ## License
