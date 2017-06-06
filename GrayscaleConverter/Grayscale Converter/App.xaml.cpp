@@ -22,8 +22,6 @@
 #include "MainPage.xaml.h"
 
 using namespace Grayscale_Converter;
-
-using namespace Platform;
 using namespace Windows::ApplicationModel;
 using namespace Windows::ApplicationModel::Activation;
 using namespace Windows::Foundation;
@@ -36,6 +34,7 @@ using namespace Windows::UI::Xaml::Input;
 using namespace Windows::UI::Xaml::Interop;
 using namespace Windows::UI::Xaml::Media;
 using namespace Windows::UI::Xaml::Navigation;
+using namespace Platform;
 
 /// <summary>
 /// Initializes the singleton application object.  This is the first line of authored code
@@ -120,7 +119,7 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
 /// </summary>
 /// <param name="sender">The source of the suspend request.</param>
 /// <param name="e">Details about the suspend request.</param>
-void App::OnSuspending(Object^ sender, SuspendingEventArgs^ e)
+void App::OnSuspending(Platform::Object^ sender, SuspendingEventArgs^ e)
 {
     (void) sender;  // Unused parameter
     (void) e;   // Unused parameter

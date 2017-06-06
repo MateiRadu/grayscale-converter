@@ -42,7 +42,8 @@
                     Content="Select a picture"
                     Height="48"
                     Margin="0"
-                    Click="Select_Picture_Click"/>
+                    Click="Select_Picture_Click"
+                    Command="{x:Bind ViewModel.SetNotifySelectedCommand}"/>
             <Button x:Name="ConvertButton"
                     Content="Convert"
                     Height="48"
@@ -102,6 +103,7 @@
                     RelativePanel.AlignRightWithPanel="True">
             <TextBlock x:Name="StatusLabel"
                        TextAlignment="Left"
+                       Text="{x:Bind ViewModel.Status, Mode=OneWay}"
                        Margin="8,4,0,0"/>
         </StackPanel>
     </RelativePanel>

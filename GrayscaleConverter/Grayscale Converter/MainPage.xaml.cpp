@@ -46,16 +46,17 @@ using namespace Windows::Storage::Streams;
 MainPage::MainPage()
 {
 	InitializeComponent();
-	NotifyUser("Ready. Pick a picture to modify.", NotifyType::StatusMessage);
+	ViewModel = ref new MainViewModel();
+	//NotifyUser("Ready. Pick a picture to modify.", NotifyType::StatusMessage);
 }
 
 
-void MainPage::Select_Picture_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void MainPage::Select_Picture_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	GetPicture();
 }
 
-void MainPage::Convert_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
+void MainPage::Convert_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	ConvertPicture();
 }
@@ -88,7 +89,7 @@ void MainPage::GetPicture()
 
 				// Enable the conversion button and notify the user.
 				ConvertButton->IsEnabled = true;
-				NotifyUser("Photo selected. Ready to convert.", NotifyType::StatusMessage);
+				//NotifyUser("Photo selected. Ready to convert.", NotifyType::StatusMessage);
 				
 				// Invalidate Modified Image if previously displayed.
 				BitmapImage^ EmptyImageSource = ref new BitmapImage();
@@ -97,7 +98,7 @@ void MainPage::GetPicture()
 				ConvertButton->Visibility = Windows::UI::Xaml::Visibility::Visible;
 			});
 		} else {
-			NotifyUser("Something went wrong. Retry", NotifyType::ErrorMessage);
+			//NotifyUser("Something went wrong. Retry", NotifyType::ErrorMessage);
 		}
 	});
 }
@@ -105,7 +106,7 @@ void MainPage::GetPicture()
 void MainPage::ConvertPicture()
 {
 	// Notifiy the user that processing has begun.
-	NotifyUser("Processing...", NotifyType::StatusMessage);
+	//NotifyUser("Processing...", NotifyType::StatusMessage);
 	RandomAccessStreamReference^ StreamFromFile = 
 		RandomAccessStreamReference::CreateFromFile(SelectedImageFile);
 
@@ -182,7 +183,7 @@ void MainPage::ConvertPicture()
 					// Convert microseconds to seconds.
 					double seconds = (double)microseconds.count() / 1000000;
 
-					NotifyUser("Done! Elapsed time: " + seconds.ToString() + " seconds.", NotifyType::SuccessMessage);
+					//NotifyUser("Done! Elapsed time: " + seconds.ToString() + " seconds.", NotifyType::SuccessMessage);
 					SaveButton->Visibility = Windows::UI::Xaml::Visibility::Visible;
 					ConvertButton->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
 				});

@@ -21,6 +21,12 @@
 #pragma once
 
 #include "MainPage.g.h"
+#include "MainViewModel.h"
+
+using namespace ViewModel;
+using namespace Windows::Storage;
+using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Media::Imaging;
 
 namespace Grayscale_Converter
 {
@@ -38,16 +44,17 @@ namespace Grayscale_Converter
 	{
 		public:
 			MainPage();
+			property MainViewModel^ ViewModel;
 
 		private:
-			void Select_Picture_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
-			void Convert_Click(Platform::Object ^ sender, Windows::UI::Xaml::RoutedEventArgs ^ e);
+			void Select_Picture_Click(Platform::Object^ sender, RoutedEventArgs^ e);
+			void Convert_Click(Platform::Object ^ sender, RoutedEventArgs ^ e);
 			void GetPicture();
 			void ConvertPicture();
 
-			Windows::Storage::StorageFile^ SelectedImageFile;
-			Windows::UI::Xaml::Media::Imaging::BitmapImage^ OriginalImageSource;
-			Windows::UI::Xaml::Media::Imaging::WriteableBitmap^ bitmap;
+			StorageFile^ SelectedImageFile;
+			BitmapImage^ OriginalImageSource;
+			WriteableBitmap^ bitmap;
 			Platform::Array<byte>^ SourcePixels;
 			byte* DestinationPixels;
 			int width;
