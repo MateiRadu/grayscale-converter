@@ -28,6 +28,7 @@ using namespace Windows::UI::Xaml::Media::Imaging;
 
 namespace ViewModel {
 
+	// Different status message foreground color codes.
 	public enum class NotifyType
 	{
 		StatusMessage,
@@ -41,49 +42,64 @@ namespace ViewModel {
 		
 		public:
 			MainViewModel();
-			virtual event PropertyChangedEventHandler ^ PropertyChanged;
-
+			
+			// Status message.
 			property Platform::String^ Status
 			{
 				Platform::String^ get();
 				void set(Platform::String^ value);
 			}
+
+			// Status message foreground.
 			property Windows::UI::Xaml::Media::SolidColorBrush^ StatusForeground
 			{
 				Windows::UI::Xaml::Media::SolidColorBrush^ get();
 				void set(Windows::UI::Xaml::Media::SolidColorBrush^ value);
 			}
+			
+			// Image selected by user.
 			property BitmapImage^ OriginalImageSource
 			{
 				BitmapImage^ get();
 				void set(BitmapImage^ value);
 			}
+
+			// Image modified to grayscale.
 			property WriteableBitmap^ ModifiedImageSource
 			{
 				WriteableBitmap^ get();
 				void set(WriteableBitmap^ value);
 			}
+			
+			// Covert button enabled toggle.
 			property bool ConvertButtonIsEnabled
 			{
 				bool get();
 				void set(bool value);
 			}
+
+			// Save button visibility toggle.
 			property Windows::UI::Xaml::Visibility SaveButtonVisibility {
 				Windows::UI::Xaml::Visibility get();
 				void set(Windows::UI::Xaml::Visibility value);
 			}
+
+			// Convert button visibility toggle.
 			property Windows::UI::Xaml::Visibility ConvertButtonVisibility {
 				Windows::UI::Xaml::Visibility get();
 				void set(Windows::UI::Xaml::Visibility value);
 			}
+			
+			// Commands to select and convert picture.
 			property ICommand^ SelectPictureCommand;
 			property ICommand^ ConvertPictureCommand;
+
+			virtual event PropertyChangedEventHandler ^ PropertyChanged;
 
 		private:
 			void OnPropertyChanged(Platform::String^ propertyName);
 
 			// Status message.
-			
 			Platform::String^ m_Status;
 			Windows::UI::Xaml::Media::SolidColorBrush^ m_StatusForeground;
 			
@@ -108,6 +124,7 @@ namespace ViewModel {
 			int yCenter;
 
 		internal:
+			// Update the status message as feedback to the user.
 			void NotifyUser(Platform::String^ strMessage, NotifyType type);
 	};
 }

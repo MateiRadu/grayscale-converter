@@ -29,13 +29,14 @@ using namespace ViewModel;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Media::Imaging;
 using namespace Windows::Graphics::Imaging;
-using namespace RelayCommand;
+using namespace Delegate;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Pickers;
 using namespace Windows::Storage::Streams;
 
 MainViewModel::MainViewModel()
 {
+	// Init the commands.
 	ConvertPictureCommand = ref new DelegateCommand(
 		ref new ExecuteDelegate(this, &MainViewModel::ConvertPicture),
 		nullptr);
@@ -43,6 +44,8 @@ MainViewModel::MainViewModel()
 	SelectPictureCommand = ref new DelegateCommand(
 		ref new ExecuteDelegate(this, &MainViewModel::SelectPicture),
 		nullptr);
+
+	// Init the UI components.
 	MainViewModel::NotifyUser("Ready. Pick a picture to modify.", NotifyType::StatusMessage);
 	MainViewModel::ConvertButtonIsEnabled = false;
 	MainViewModel::SaveButtonVisibility = Windows::UI::Xaml::Visibility::Collapsed;
@@ -304,7 +307,6 @@ void MainViewModel::ConvPicture()
 		});
 	});
 }
-
 
 void MainViewModel::OnPropertyChanged(Platform::String^ propertyName)
 {
