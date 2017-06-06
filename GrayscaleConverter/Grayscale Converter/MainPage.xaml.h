@@ -30,12 +30,6 @@ using namespace Windows::UI::Xaml::Media::Imaging;
 
 namespace Grayscale_Converter
 {
-	public enum class NotifyType
-	{
-		StatusMessage,
-		ErrorMessage,
-		SuccessMessage
-	};
 
 	/// <summary>
 	/// Main page of the app.
@@ -47,9 +41,7 @@ namespace Grayscale_Converter
 			property MainViewModel^ ViewModel;
 
 		private:
-			void Select_Picture_Click(Platform::Object^ sender, RoutedEventArgs^ e);
 			void Convert_Click(Platform::Object ^ sender, RoutedEventArgs ^ e);
-			void GetPicture();
 			void ConvertPicture();
 
 			StorageFile^ SelectedImageFile;
@@ -61,8 +53,5 @@ namespace Grayscale_Converter
 			int height;
 			int xCenter;
 			int yCenter;
-
-		internal:
-			void NotifyUser(Platform::String^ strMessage, NotifyType type);
 	};
 }

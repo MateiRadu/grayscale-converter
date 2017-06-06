@@ -42,20 +42,20 @@
                     Content="Select a picture"
                     Height="48"
                     Margin="0"
-                    Click="Select_Picture_Click"
                     Command="{x:Bind ViewModel.SetNotifySelectedCommand}"/>
             <Button x:Name="ConvertButton"
                     Content="Convert"
                     Height="48"
                     Margin="0"
-                    IsEnabled="False"
+                    IsEnabled="{x:Bind ViewModel.ConvertButtonIsEnabled, Mode=OneWay}"
+                    Visibility="{x:Bind ViewModel.ConvertButtonVisibility, Mode=OneWay}"
                     Click="Convert_Click"/>
             <Button x:Name="SaveButton"
                     Content="Save result"
                     Height="48"
                     Margin="0"
                     IsEnabled="False"
-                    Visibility="Collapsed"/>
+                    Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"/>
         </StackPanel>
         <!-- Images -->
         <Grid RelativePanel.Below="spHeader"
@@ -80,7 +80,8 @@
                        Grid.Column="0"
                        Grid.Row="1"
                        Margin="0,0,8,16"
-                       Stretch="Uniform"/>
+                       Stretch="Uniform"
+                   Source="{x:Bind ViewModel.OriginalImageSource, Mode=OneWay}"/>
             <!-- Modified Image -->
             <TextBlock Grid.Column="1"
                        Grid.Row="0"
@@ -104,6 +105,7 @@
             <TextBlock x:Name="StatusLabel"
                        TextAlignment="Left"
                        Text="{x:Bind ViewModel.Status, Mode=OneWay}"
+                       Foreground="{x:Bind ViewModel.StatusForeground, Mode=OneWay}"
                        Margin="8,4,0,0"/>
         </StackPanel>
     </RelativePanel>

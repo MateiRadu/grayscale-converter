@@ -60,7 +60,8 @@
                Stretch="Uniform"
                MaxHeight="240"
                RelativePanel.Below="txtOriginalImage"
-               RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+               RelativePanel.AlignHorizontalCenterWithPanel="True"
+               Source="{x:Bind ViewModel.OriginalImageSource, Mode=OneWay}"/>
         <!-- Modified Image -->
         <TextBlock x:Name="txtModifiedImage"
                    RelativePanel.Below="OriginalImage"
@@ -92,13 +93,14 @@
                     HorizontalAlignment="Stretch"
                     Content="Select a picture"
                     Margin="0,0,4,0"
-                    Click="Select_Picture_Click"/>
+                    Command="{x:Bind ViewModel.SetNotifySelectedCommand}"/>
             <Button x:Name="ConvertButton"
                     Grid.Column="1"
                     HorizontalAlignment="Stretch"
                     Content="Convert"
                     Margin="4,0,0,0"
-                    IsEnabled="False"
+                    IsEnabled="{x:Bind ViewModel.ConvertButtonIsEnabled, Mode=OneWay}"
+                    Visibility="{x:Bind ViewModel.ConvertButtonVisibility, Mode=OneWay}"
                     Click="Convert_Click"/>
             <Button x:Name="SaveButton"
                     Grid.Column="1"
@@ -106,7 +108,7 @@
                     Content="Save result"
                     Margin="4,0,0,0"
                     IsEnabled="False"
-                    Visibility="Collapsed"
+                    Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"
                     Click="Convert_Click"/>
         </Grid>
         <!-- Status -->

@@ -50,57 +50,9 @@ MainPage::MainPage()
 	//NotifyUser("Ready. Pick a picture to modify.", NotifyType::StatusMessage);
 }
 
-
-void MainPage::Select_Picture_Click(Object^ sender, RoutedEventArgs^ e)
-{
-	GetPicture();
-}
-
 void MainPage::Convert_Click(Object^ sender, RoutedEventArgs^ e)
 {
 	ConvertPicture();
-}
-
-void MainPage::GetPicture()
-{
-	// Prepare the file picker and the file type filters.
-	FileOpenPicker^ FilePicker = ref new FileOpenPicker();
-	FilePicker->ViewMode = PickerViewMode::Thumbnail;
-	FilePicker->SuggestedStartLocation = PickerLocationId::PicturesLibrary;
-	FilePicker->FileTypeFilter->Append(".jpg");
-	FilePicker->FileTypeFilter->Append(".jpeg");
-	FilePicker->FileTypeFilter->Append(".png");
-
-	create_task(FilePicker->PickSingleFileAsync())
-		.then([this](StorageFile^ file)
-	{
-		if (file)
-		{
-			// Save the file for grayscale conversion.
-			SelectedImageFile = file;
-
-			create_task(file->OpenAsync(Windows::Storage::FileAccessMode::Read))
-				.then([this](IRandomAccessStream^ Stream)
-			{
-				// Create a new BitmapImage and set the file stream as source.
-				OriginalImageSource = ref new BitmapImage();
-				OriginalImageSource->SetSourceAsync(Stream);
-				OriginalImage->Source = OriginalImageSource;
-
-				// Enable the conversion button and notify the user.
-				ConvertButton->IsEnabled = true;
-				//NotifyUser("Photo selected. Ready to convert.", NotifyType::StatusMessage);
-				
-				// Invalidate Modified Image if previously displayed.
-				BitmapImage^ EmptyImageSource = ref new BitmapImage();
-				ModifiedImage->Source = EmptyImageSource;
-				SaveButton->Visibility = Windows::UI::Xaml::Visibility::Collapsed;
-				ConvertButton->Visibility = Windows::UI::Xaml::Visibility::Visible;
-			});
-		} else {
-			//NotifyUser("Something went wrong. Retry", NotifyType::ErrorMessage);
-		}
-	});
 }
 
 void MainPage::ConvertPicture()
@@ -190,23 +142,4 @@ void MainPage::ConvertPicture()
 			});
 		});
 	});
-}
-
-void MainPage::NotifyUser(String^ strMessage, NotifyType type)
-{
-	switch (type)
-	{
-		case NotifyType::StatusMessage:
-			StatusLabel->Foreground = ref new SolidColorBrush(Windows::UI::Colors::Gray);
-			break;
-		case NotifyType::ErrorMessage:
-			StatusLabel->Foreground = ref new SolidColorBrush(Windows::UI::Colors::Red);
-			break;
-		case NotifyType::SuccessMessage:
-			StatusLabel->Foreground = ref new SolidColorBrush(Windows::UI::Colors::Green);
-			break;
-		default:
-			break;
-	}
-	StatusLabel->Text = strMessage;
 }
