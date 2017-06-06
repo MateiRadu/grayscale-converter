@@ -61,3 +61,8 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# Custom definitions
+###############################################################################
+GrayscaleConverter/Grayscale\ Converter/pch.h linguist-language=C++

@@ -38,6 +38,11 @@ namespace ViewModel {
 				BitmapImage^ get();
 				void set(BitmapImage^ value);
 			}
+			property WriteableBitmap^ ModifiedImageSource
+			{
+				WriteableBitmap^ get();
+				void set(WriteableBitmap^ value);
+			}
 			property bool ConvertButtonIsEnabled
 			{
 				bool get();
@@ -51,25 +56,36 @@ namespace ViewModel {
 				Windows::UI::Xaml::Visibility get();
 				void set(Windows::UI::Xaml::Visibility value);
 			}
-			property ICommand^ SetNotifySelectedCommand;
-			property ICommand^ SetNotifyReadyCommand;
+			property ICommand^ SelectPictureCommand;
+			property ICommand^ ConvertPictureCommand;
 
 		private:
 			void OnPropertyChanged(Platform::String^ propertyName);
 
 			// Status message.
-			void SetNotifyReady(Platform::Object^ parameter);
+			
 			Platform::String^ m_Status;
 			Windows::UI::Xaml::Media::SolidColorBrush^ m_StatusForeground;
 			
 			// Original image.
-			void SetNotifySelected(Platform::Object^ parameter);
+			void SelectPicture(Platform::Object^ parameter);
 			void GetPicture();
 			StorageFile^ SelectedImageFile;
 			BitmapImage^ m_OriginalImageSource;
 			bool m_ConvertButtonIsEnabled;
 			Windows::UI::Xaml::Visibility m_SaveButtonVisibility;
 			Windows::UI::Xaml::Visibility m_ConvertButtonVisibility;
+
+			// Convert image.
+			void ConvertPicture(Platform::Object^ parameter);
+			void ConvPicture();
+			WriteableBitmap^ m_ModifiedImageSource;
+			byte* DestinationPixels;
+			Platform::Array<byte>^ SourcePixels;
+			int width;
+			int height;
+			int xCenter;
+			int yCenter;
 
 		internal:
 			void NotifyUser(Platform::String^ strMessage, NotifyType type);

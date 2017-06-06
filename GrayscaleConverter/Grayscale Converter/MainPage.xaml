@@ -42,14 +42,14 @@
                     Content="Select a picture"
                     Height="48"
                     Margin="0"
-                    Command="{x:Bind ViewModel.SetNotifySelectedCommand}"/>
+                    Command="{x:Bind ViewModel.SelectPictureCommand}"/>
             <Button x:Name="ConvertButton"
                     Content="Convert"
                     Height="48"
                     Margin="0"
                     IsEnabled="{x:Bind ViewModel.ConvertButtonIsEnabled, Mode=OneWay}"
                     Visibility="{x:Bind ViewModel.ConvertButtonVisibility, Mode=OneWay}"
-                    Click="Convert_Click"/>
+                    Command="{x:Bind ViewModel.ConvertPictureCommand}"/>
             <Button x:Name="SaveButton"
                     Content="Save result"
                     Height="48"
@@ -92,7 +92,8 @@
                    Grid.Row="1"
                    Margin="8,0,0,16"
                    x:Name="ModifiedImage"
-                   Stretch="Uniform"/>
+                   Stretch="Uniform"
+                   Source="{x:Bind ViewModel.ModifiedImageSource, Mode=OneWay}"/>
         </Grid>
         <!-- Status -->
         <StackPanel x:Name="StatusLabelStack"

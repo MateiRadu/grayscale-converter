@@ -24,9 +24,6 @@
 #include "MainViewModel.h"
 
 using namespace ViewModel;
-using namespace Windows::Storage;
-using namespace Windows::UI::Xaml;
-using namespace Windows::UI::Xaml::Media::Imaging;
 
 namespace Grayscale_Converter
 {
@@ -39,19 +36,5 @@ namespace Grayscale_Converter
 		public:
 			MainPage();
 			property MainViewModel^ ViewModel;
-
-		private:
-			void Convert_Click(Platform::Object ^ sender, RoutedEventArgs ^ e);
-			void ConvertPicture();
-
-			StorageFile^ SelectedImageFile;
-			BitmapImage^ OriginalImageSource;
-			WriteableBitmap^ bitmap;
-			Platform::Array<byte>^ SourcePixels;
-			byte* DestinationPixels;
-			int width;
-			int height;
-			int xCenter;
-			int yCenter;
 	};
 }

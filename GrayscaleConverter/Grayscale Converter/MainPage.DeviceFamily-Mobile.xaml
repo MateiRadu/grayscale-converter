@@ -69,13 +69,14 @@
                        Text="Converted image"
                        TextAlignment="Center"
                    RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-        <Image RelativePanel.Below="txtModifiedImage"
+                <Image RelativePanel.Below="txtModifiedImage"
                    Margin="0,0,0,8"
                MaxHeight="240"
                    x:Name="ModifiedImage"
                    Stretch="Uniform"
-               RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-        
+               RelativePanel.AlignHorizontalCenterWithPanel="True"
+               Source="{x:Bind ViewModel.ModifiedImageSource, Mode=OneWay}"/>
+
             </RelativePanel>
         </ScrollViewer>
         <!-- Bottom buttons -->
@@ -93,7 +94,7 @@
                     HorizontalAlignment="Stretch"
                     Content="Select a picture"
                     Margin="0,0,4,0"
-                    Command="{x:Bind ViewModel.SetNotifySelectedCommand}"/>
+                    Command="{x:Bind ViewModel.SelectPictureCommand}"/>
             <Button x:Name="ConvertButton"
                     Grid.Column="1"
                     HorizontalAlignment="Stretch"
@@ -101,15 +102,14 @@
                     Margin="4,0,0,0"
                     IsEnabled="{x:Bind ViewModel.ConvertButtonIsEnabled, Mode=OneWay}"
                     Visibility="{x:Bind ViewModel.ConvertButtonVisibility, Mode=OneWay}"
-                    Click="Convert_Click"/>
+                    Command="{x:Bind ViewModel.ConvertPictureCommand}"/>
             <Button x:Name="SaveButton"
                     Grid.Column="1"
                     HorizontalAlignment="Stretch"
                     Content="Save result"
                     Margin="4,0,0,0"
                     IsEnabled="False"
-                    Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"
-                    Click="Convert_Click"/>
+                    Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"/>
         </Grid>
         <!-- Status -->
         <StackPanel x:Name="StatusLabelStack"
@@ -121,6 +121,8 @@
                     RelativePanel.AlignRightWithPanel="True">
             <TextBlock x:Name="StatusLabel"
                        TextAlignment="Left"
+                       Text="{x:Bind ViewModel.Status, Mode=OneWay}"
+                       Foreground="{x:Bind ViewModel.StatusForeground, Mode=OneWay}"
                        Margin="8,4,0,0"/>
         </StackPanel>
     </RelativePanel>
