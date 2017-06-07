@@ -45,6 +45,10 @@ MainViewModel::MainViewModel()
 		ref new ExecuteDelegate(this, &MainViewModel::SelectPicture),
 		nullptr);
 
+	SavePictureCommand = ref new DelegateCommand(
+		ref new ExecuteDelegate(this, &MainViewModel::SavePicture),
+		nullptr);
+
 	// Init the UI components.
 	MainViewModel::NotifyUser("Ready. Pick a picture to modify.", NotifyType::StatusMessage);
 	MainViewModel::ConvertButtonIsEnabled = false;
@@ -161,6 +165,10 @@ void MainViewModel::SelectPicture(Platform::Object^ Parameter) {
 	GetPicture();
 }
 
+void MainViewModel::SavePicture(Platform::Object^ Parameter) {
+	SavPicture();
+}
+
 void MainViewModel::NotifyUser(Platform::String^ strMessage, NotifyType type)
 {
 	switch (type)
@@ -182,6 +190,9 @@ void MainViewModel::NotifyUser(Platform::String^ strMessage, NotifyType type)
 
 void MainViewModel::GetPicture()
 {
+	// Notifiy the user that processing has begun.
+	NotifyUser("Selecting...", NotifyType::StatusMessage);
+
 	// Prepare the file picker and the file type filters.
 	FileOpenPicker^ FilePicker = ref new FileOpenPicker();
 	FilePicker->ViewMode = PickerViewMode::Thumbnail;
@@ -303,6 +314,39 @@ void MainViewModel::ConvPicture()
 					SaveButtonVisibility = Windows::UI::Xaml::Visibility::Visible;
 					ConvertButtonVisibility = Windows::UI::Xaml::Visibility::Collapsed;
 				});
+			});
+		});
+	});
+}
+
+void MainViewModel::SavPicture() 
+{
+	// Notify the user that the process has begun.
+	NotifyUser("Saving image...", NotifyType::StatusMessage);
+
+	// Prepare the SavePicker with available extensions.
+	FileSavePicker^ picker = ref new FileSavePicker();
+	auto imgExtensions = ref new Platform::Collections::Vector<Platform::String^>();
+	imgExtensions->Append(".jpg");
+	picker->FileTypeChoices->Insert("JPG File", imgExtensions);
+
+	create_task(picker->PickSaveFileAsync()).then([this](StorageFile^ saveFile)
+	{
+		if (saveFile == nullptr)
+		{
+			return;
+		}
+		create_task(saveFile->OpenAsync(FileAccessMode::ReadWrite)).then([this](IRandomAccessStream^ stream)
+		{
+			create_task(BitmapEncoder::CreateAsync(BitmapEncoder::JpegEncoderId, stream)).then([this](BitmapEncoder^ encoder)
+			{
+				IBuffer^ buffer = ModifiedImageSource->PixelBuffer;
+				DataReader^ dataReader = DataReader::FromBuffer(buffer);
+				Platform::Array<unsigned char, 1>^ pixels = ref new Platform::Array<unsigned char, 1>(buffer->Length);
+				dataReader->ReadBytes(pixels);
+				encoder->SetPixelData(BitmapPixelFormat::Bgra8, BitmapAlphaMode::Ignore, ModifiedImageSource->PixelWidth, ModifiedImageSource->PixelHeight, 96.0, 86.0, pixels);
+				create_task(encoder->FlushAsync());
+				NotifyUser("Image saved.", NotifyType::SuccessMessage);
 			});
 		});
 	});

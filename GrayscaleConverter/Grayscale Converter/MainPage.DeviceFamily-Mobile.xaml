@@ -106,8 +106,9 @@
                     HorizontalAlignment="Stretch"
                     Content="Save result"
                     Margin="4,0,0,0"
-                    IsEnabled="False"
-                    Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"/>
+                    IsEnabled="True"
+                    Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"
+                    Command="{x:Bind ViewModel.SavePictureCommand}"/>
         </Grid>
         <!-- Status -->
         <StackPanel x:Name="StatusLabelStack"

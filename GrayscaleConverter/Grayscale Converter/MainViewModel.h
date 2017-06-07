@@ -90,9 +90,10 @@ namespace ViewModel {
 				void set(Windows::UI::Xaml::Visibility value);
 			}
 			
-			// Commands to select and convert picture.
+			// Commands.
 			property ICommand^ SelectPictureCommand;
 			property ICommand^ ConvertPictureCommand;
+			property ICommand^ SavePictureCommand;
 
 			virtual event PropertyChangedEventHandler ^ PropertyChanged;
 
@@ -122,6 +123,10 @@ namespace ViewModel {
 			int height;
 			int xCenter;
 			int yCenter;
+
+			// Save picture.
+			void SavePicture(Platform::Object^ parameter);
+			void SavPicture();
 
 		internal:
 			// Update the status message as feedback to the user.

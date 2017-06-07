@@ -53,8 +53,9 @@
                     Content="Save result"
                     Height="48"
                     Margin="0"
-                    IsEnabled="False"
-                    Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"/>
+                    IsEnabled="True"
+                    Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"
+                    Command="{x:Bind ViewModel.SavePictureCommand}"/>
         </StackPanel>
         <!-- Images -->
         <Grid RelativePanel.Below="spHeader"

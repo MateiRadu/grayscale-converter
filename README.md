@@ -1,19 +1,5 @@
 # Grayscale Converter
-
 A simple color-to-grayscale UWP C++ application.
-
-The application demonstrates these tasks:
-
-1.  **Let the user pick one picture**
-
-    Uses the **FileOpenPicker**.**PickSingleFileAsync** to call a file picker window and let the user pick a single image (jpg, jpeg or png).
-2. **Creates a bitmap and displays the image to the user**
-
-    A **BitmapImage** will be created and set using **SetSourceAsync** with the stream provided by the **StorageFile** of the selected image.
-    
-3. **Decode, modifiy and Encode**
-
-    Upon user command, the image will be decoded, converted and displayed next to the original picture for comparison.
 
 ## Screenshot
 ![Screenshot](https://github.com/MateiRadu/grayscale-converter/blob/master/Screenshots/W10.png)
