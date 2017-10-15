@@ -34,6 +34,9 @@
     <ClCompile Include="GrayscaleUtil.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="FileUtil.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -46,6 +49,9 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="GrayscaleUtil.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="FileUtil.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

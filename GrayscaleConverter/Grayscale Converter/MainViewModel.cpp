@@ -22,6 +22,7 @@
 #include "MainViewModel.h"
 #include "Robuffer.h"
 #include "GrayscaleUtil.h"
+#include "FileUtil.h"
 #include <chrono>
 
 using namespace concurrency;
@@ -198,9 +199,9 @@ void MainViewModel::GetPicture()
 	FileOpenPicker^ FilePicker = ref new FileOpenPicker();
 	FilePicker->ViewMode = PickerViewMode::Thumbnail;
 	FilePicker->SuggestedStartLocation = PickerLocationId::PicturesLibrary;
-	FilePicker->FileTypeFilter->Append(".jpg");
-	FilePicker->FileTypeFilter->Append(".jpeg");
-	FilePicker->FileTypeFilter->Append(".png");
+	for (Platform::String^ fileFormat : FileUtil::allowedFileFormats) {
+		FilePicker->FileTypeFilter->Append(fileFormat);
+	}
 
 	create_task(FilePicker->PickSingleFileAsync())
 		.then([this](StorageFile^ file)

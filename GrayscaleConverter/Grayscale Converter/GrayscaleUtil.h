@@ -22,16 +22,16 @@
 
 class GrayscaleUtil
 {
-public:
-	GrayscaleUtil();
-	~GrayscaleUtil();
+	public:
+		GrayscaleUtil();
+		~GrayscaleUtil();
 
-	// Primary coefficients according to ITU-R Recommendation BT.709.
-	static const double COEFF_BLUE;
-	static const double COEFF_GREEN;
-	static const double COEFF_RED;
+		// Primary coefficients according to ITU-R Recommendation BT.709.
+		static const double COEFF_BLUE;
+		static const double COEFF_GREEN;
+		static const double COEFF_RED;
 
-	// Calculate the Luma component (gray) based on the RGB colors.
-	static double calculateLumaComponent(double red, double green, double blue);
+		// Calculate the Luma component (gray) based on the RGB colors.
+		static double calculateLumaComponent(double red, double green, double blue);
 };
 

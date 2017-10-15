@@ -18,26 +18,14 @@
 //
 //*****************************************************************************
 
-#include "pch.h"
-#include "GrayscaleUtil.h"
+#pragma once
 
-GrayscaleUtil::GrayscaleUtil()
+class FileUtil
 {
-}
+	public:
+		FileUtil();
+		~FileUtil();
 
-GrayscaleUtil::~GrayscaleUtil()
-{
-}
+		static const std::vector<Platform::String^> allowedFileFormats;
+};
 
-const double GrayscaleUtil::COEFF_BLUE = 0.0722;
-const double GrayscaleUtil::COEFF_GREEN = 0.7152;
-const double GrayscaleUtil::COEFF_RED = 0.2126;
-
-double GrayscaleUtil::calculateLumaComponent(double red, double green, double blue)
-{
-	double componentRed = red * GrayscaleUtil::COEFF_RED;
-	double componentGreen = green * GrayscaleUtil::COEFF_GREEN;
-	double componentBlue = blue * GrayscaleUtil::COEFF_BLUE;
-
-	return componentBlue + componentGreen + componentRed;
-}
