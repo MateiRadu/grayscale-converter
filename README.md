@@ -5,14 +5,24 @@ A simple color-to-grayscale UWP C++ application.
 ![Screenshot](https://github.com/MateiRadu/grayscale-converter/blob/master/Screenshots/W10.png)
 
 ## Formula
-The specific gray for pixel is calculated by assigning to each color their average:
-```
-byte OldRed, OldGreen, OldBlue;
-byte Average = (OldRed + OldGreen + OldBlue) / 3;
+The gray color for each pixel is calculated according to the [ITU-R Recommendation BT.709](https://en.wikipedia.org/wiki/Grayscale#Luma_coding_in_video_systems):
+```cpp
+const double BLUE = 0.0722;
+const double GREEN = 0.7152;
+const double RED = 0.2126;
 
-byte NewRed   = Average;
-byte NewGreen = Average;
-byte NewBlue  = Average;
+// Calculate color components.
+double componentBlue = sourceBlue * BLUE;
+double componentGreen = sourceGreen * GREEN;
+double componentRed = sourceRed * RED;
+
+// Calculate the Luma component (gray).
+byte componentLuma = (componentBlue + componentGreen + componentRed);
+
+// Assign the Luma component to each primary.
+byte newBlue = componentLuma;
+byte newGreen = componentLuma;
+byte newRed = componentLuma;
 ```
 
 ## Future developments

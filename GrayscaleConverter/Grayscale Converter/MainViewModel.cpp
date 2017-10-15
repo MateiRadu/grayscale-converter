@@ -291,15 +291,25 @@ void MainViewModel::ConvPicture()
 							int iDst = 4 * (yDestination * width + xDestination);
 							int iSrc = 4 * (yDestination * width + xDestination);
 
-							// Generate grayscale pixel color based on average RGB.
-							byte AveragePixel = (byte)((SourcePixels[iSrc++] +
-								SourcePixels[iSrc++] + SourcePixels[iSrc++]) / 3);
+							// Coefficients according to ITU-R Recommendation BT.709.
+							const double BLUE = 0.0722;
+							const double GREEN = 0.7152;
+							const double RED = 0.2126;
+
+							// Calculate color components.
+							double componentBlue = (double)(SourcePixels[iSrc++]) * BLUE;
+							double componentGreen = (double)(SourcePixels[iSrc++]) * GREEN;
+							double componentRed = (double)(SourcePixels[iSrc++]) * RED;
+
+							// Calculate the Luma component.
+							byte componentLuma = (componentBlue + componentGreen + componentRed);
+
 
 							// Transfer the pixel bytes.
 							// Alpha channel is unchanged.
-							DestinationPixels[iDst++] = AveragePixel;		// Blue
-							DestinationPixels[iDst++] = AveragePixel;		// Green
-							DestinationPixels[iDst++] = AveragePixel;		// Red
+							DestinationPixels[iDst++] = componentLuma;		// Blue
+							DestinationPixels[iDst++] = componentLuma;		// Green
+							DestinationPixels[iDst++] = componentLuma;		// Red
 							DestinationPixels[iDst] = SourcePixels[iSrc];	// Alpha channel
 						}
 					}
