@@ -14,6 +14,9 @@
     <Filter Include="ViewModels">
       <UniqueIdentifier>{3af70b8d-65f5-48f0-9036-d40d36f78723}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{dcd82497-b6a8-4898-9cdc-5541cb0736da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml" />
@@ -28,6 +31,9 @@
     <ClCompile Include="DelegateCommand.cpp">
       <Filter>Common</Filter>
     </ClCompile>
+    <ClCompile Include="GrayscaleUtil.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -38,6 +44,9 @@
     </ClInclude>
     <ClInclude Include="DelegateCommand.h">
       <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="GrayscaleUtil.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

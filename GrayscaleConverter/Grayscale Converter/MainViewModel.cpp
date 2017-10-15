@@ -21,6 +21,7 @@
 #include "pch.h"
 #include "MainViewModel.h"
 #include "Robuffer.h"
+#include "GrayscaleUtil.h"
 #include <chrono>
 
 using namespace concurrency;
@@ -291,19 +292,13 @@ void MainViewModel::ConvPicture()
 							int iDst = 4 * (yDestination * width + xDestination);
 							int iSrc = 4 * (yDestination * width + xDestination);
 
-							// Coefficients according to ITU-R Recommendation BT.709.
-							const double BLUE = 0.0722;
-							const double GREEN = 0.7152;
-							const double RED = 0.2126;
+							// Get RGB values.
+							double blue = (double)(SourcePixels[iSrc++]);
+							double green = (double)(SourcePixels[iSrc++]);
+							double red = (double)(SourcePixels[iSrc++]);
 
-							// Calculate color components.
-							double componentBlue = (double)(SourcePixels[iSrc++]) * BLUE;
-							double componentGreen = (double)(SourcePixels[iSrc++]) * GREEN;
-							double componentRed = (double)(SourcePixels[iSrc++]) * RED;
-
-							// Calculate the Luma component.
-							byte componentLuma = (componentBlue + componentGreen + componentRed);
-
+							// Calculate gray value.
+							byte componentLuma = GrayscaleUtil::calculateLumaComponent(red, green, blue);
 
 							// Transfer the pixel bytes.
 							// Alpha channel is unchanged.
