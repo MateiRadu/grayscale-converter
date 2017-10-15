@@ -23,10 +23,25 @@
 
 FileUtil::FileUtil()
 {
+	FileUtil::setupFilePicker();
 }
 
 FileUtil::~FileUtil()
 {
+}
+
+void FileUtil::setupFilePicker()
+{
+	using namespace Windows::Storage::Pickers;
+
+	FileUtil::picker = ref new FileOpenPicker();
+	FileUtil::picker->ViewMode = PickerViewMode::Thumbnail;
+	FileUtil::picker->SuggestedStartLocation = PickerLocationId::PicturesLibrary;
+
+	// Populate filter with the allower file formats list.
+	for (Platform::String^ fileFormat : FileUtil::allowedFileFormats) {
+		FileUtil::picker->FileTypeFilter->Append(fileFormat);
+	}
 }
 
 const std::vector<Platform::String^> FileUtil::allowedFileFormats = {

@@ -27,5 +27,9 @@ class FileUtil
 		~FileUtil();
 
 		static const std::vector<Platform::String^> allowedFileFormats;
+		Windows::Storage::Pickers::FileOpenPicker^ picker;
+
+	private:
+		void setupFilePicker();
 };
 

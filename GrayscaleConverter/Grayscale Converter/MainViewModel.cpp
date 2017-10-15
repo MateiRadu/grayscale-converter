@@ -195,24 +195,16 @@ void MainViewModel::GetPicture()
 	// Notifiy the user that processing has begun.
 	NotifyUser("Selecting...", NotifyType::StatusMessage);
 
-	// Prepare the file picker and the file type filters.
-	FileOpenPicker^ FilePicker = ref new FileOpenPicker();
-	FilePicker->ViewMode = PickerViewMode::Thumbnail;
-	FilePicker->SuggestedStartLocation = PickerLocationId::PicturesLibrary;
-	for (Platform::String^ fileFormat : FileUtil::allowedFileFormats) {
-		FilePicker->FileTypeFilter->Append(fileFormat);
-	}
+	auto fileUtil = new FileUtil();
 
-	create_task(FilePicker->PickSingleFileAsync())
-		.then([this](StorageFile^ file)
+	create_task(fileUtil->picker->PickSingleFileAsync()).then([this](StorageFile^ file)
 	{
 		if (file)
 		{
 			// Save the file for grayscale conversion.
 			SelectedImageFile = file;
 
-			create_task(file->OpenAsync(Windows::Storage::FileAccessMode::Read))
-				.then([this](IRandomAccessStream^ Stream)
+			create_task(file->OpenAsync(Windows::Storage::FileAccessMode::Read)).then([this](IRandomAccessStream^ Stream)
 			{
 				// Create a new BitmapImage and set the file stream as source.
 				OriginalImageSource = ref new BitmapImage();
