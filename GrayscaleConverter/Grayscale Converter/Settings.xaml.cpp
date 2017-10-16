@@ -1,7 +1,7 @@
 ﻿//*****************************************************************************
 //
 //  Grayscale Converter, a simple color-to-grayscale UWP converter.
-//  Copyright(C) 2016, 2017 Matei Bogdan Radu
+//  Copyright(C) 2017 Matei Bogdan Radu
 //
 //  This program is free software : you can redistribute it and / or modify
 //  it under the terms of the GNU General Public License as published by the
@@ -19,24 +19,20 @@
 //*****************************************************************************
 
 #include "pch.h"
-#include "MainPage.xaml.h"
+#include "Settings.xaml.h"
 
 using namespace Grayscale_Converter;
+using namespace Windows::UI::Xaml;
+using namespace Windows::UI::Xaml::Controls;
 using namespace Windows::UI::Xaml::Navigation;
 
-MainPage::MainPage()
+Settings::Settings()
 {
 	InitializeComponent();
 	this->NavigationCacheMode = Navigation::NavigationCacheMode::Enabled;
-	ViewModel = ref new MainViewModel();
 }
 
-void Grayscale_Converter::MainPage::Settings_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
-{
-	this->Frame->Navigate(Windows::UI::Xaml::Interop::TypeName(Settings::typeid));
-}
-
-void MainPage::OnNavigatedTo(NavigationEventArgs^ e)
+void Settings::OnNavigatedTo(NavigationEventArgs^ e)
 {
 	using Windows::UI::Core::SystemNavigationManager;
 	using Windows::UI::Core::AppViewBackButtonVisibility;

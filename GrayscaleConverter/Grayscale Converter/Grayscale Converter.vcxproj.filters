@@ -280,5 +280,8 @@
     <Page Include="MainPage.xaml">
       <Filter>Views</Filter>
     </Page>
+    <Page Include="Settings.xaml">
+      <Filter>Views</Filter>
+    </Page>
   </ItemGroup>
 </Project>

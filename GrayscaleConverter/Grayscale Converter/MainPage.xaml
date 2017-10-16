@@ -56,6 +56,12 @@
                     IsEnabled="True"
                     Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"
                     Command="{x:Bind ViewModel.SavePictureCommand}"/>
+            <Button x:Name="Settings"
+                    Content="Settings"
+                    Height="48"
+                    Margin="0"
+                    IsEnabled="True"
+                    Click="Settings_Click"/>
         </StackPanel>
         <!-- Images -->
         <Grid RelativePanel.Below="spHeader"
