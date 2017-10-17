@@ -37,6 +37,7 @@
     <ClCompile Include="FileUtil.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Settings.xaml.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="FileUtil.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Settings.xaml.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">
@@ -274,9 +276,6 @@
     <None Include="Grayscale Converter_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MainPage.DeviceFamily-Mobile.xaml">
-      <Filter>Views</Filter>
-    </Page>
     <Page Include="MainPage.xaml">
       <Filter>Views</Filter>
     </Page>

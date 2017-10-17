@@ -54,7 +54,7 @@ MainViewModel::MainViewModel()
 	// Init the UI components.
 	MainViewModel::NotifyUser("Ready. Pick a picture to modify.", NotifyType::StatusMessage);
 	MainViewModel::ConvertButtonIsEnabled = false;
-	MainViewModel::SaveButtonVisibility = Windows::UI::Xaml::Visibility::Collapsed;
+	MainViewModel::SaveButtonIsEnabled = false;
 }
 
 // Properties.
@@ -101,31 +101,17 @@ void MainViewModel::StatusForeground::set(Windows::UI::Xaml::Media::SolidColorBr
 	}
 }
 
-Windows::UI::Xaml::Visibility MainViewModel::SaveButtonVisibility::get()
+bool MainViewModel::SaveButtonIsEnabled::get()
 {
-	return m_SaveButtonVisibility;
+	return m_SaveButtonIsEnabled;
 }
 
-void MainViewModel::SaveButtonVisibility::set(Windows::UI::Xaml::Visibility value)
+void MainViewModel::SaveButtonIsEnabled::set(bool value)
 {
-	if (m_SaveButtonVisibility != value)
+	if (m_SaveButtonIsEnabled != value)
 	{
-		m_SaveButtonVisibility = value;
-		OnPropertyChanged("SaveButtonVisibility");
-	}
-}
-
-Windows::UI::Xaml::Visibility MainViewModel::ConvertButtonVisibility::get()
-{
-	return m_ConvertButtonVisibility;
-}
-
-void MainViewModel::ConvertButtonVisibility::set(Windows::UI::Xaml::Visibility value)
-{
-	if (m_ConvertButtonVisibility != value)
-	{
-		m_ConvertButtonVisibility = value;
-		OnPropertyChanged("ConvertButtonVisibility");
+		m_SaveButtonIsEnabled = value;
+		OnPropertyChanged("SaveButtonIsEnabled");
 	}
 }
 
@@ -216,8 +202,7 @@ void MainViewModel::GetPicture()
 
 				// Invalidate Modified Image if previously displayed.
 				ModifiedImageSource = ref new WriteableBitmap(1, 1);
-				SaveButtonVisibility = Windows::UI::Xaml::Visibility::Collapsed;
-				ConvertButtonVisibility = Windows::UI::Xaml::Visibility::Visible;
+				SaveButtonIsEnabled = false;
 			});
 		}
 		else {
@@ -309,8 +294,7 @@ void MainViewModel::ConvPicture()
 					double seconds = (double)microseconds.count() / 1000000;
 
 					NotifyUser("Done! Elapsed time: " + seconds.ToString() + " seconds.", NotifyType::SuccessMessage);
-					SaveButtonVisibility = Windows::UI::Xaml::Visibility::Visible;
-					ConvertButtonVisibility = Windows::UI::Xaml::Visibility::Collapsed;
+					SaveButtonIsEnabled = true;
 				});
 			});
 		});

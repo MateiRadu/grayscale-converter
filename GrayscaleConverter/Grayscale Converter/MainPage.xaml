@@ -51,6 +51,7 @@
         <!-- Header -->
         <CommandBar x:Name="spHeader"
                     Background="Transparent" 
+                    DefaultLabelPosition="Right"
                     IsOpen="False"
                     Margin="-16,0,-16,0"
                     RelativePanel.AlignLeftWithPanel="True"
@@ -68,7 +69,7 @@
             <AppBarButton Icon="Save" 
                           Label="Save result"
                           Style="{StaticResource AppBarButtonRevealStyle}"
-                          Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"
+                          IsEnabled="{x:Bind ViewModel.SaveButtonIsEnabled, Mode=OneWay}"
                           Command="{x:Bind ViewModel.SavePictureCommand}"/>
             <AppBarSeparator />
             <AppBarButton Icon="Setting" 

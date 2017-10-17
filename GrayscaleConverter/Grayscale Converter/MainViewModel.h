@@ -78,16 +78,11 @@ namespace ViewModel {
 				void set(bool value);
 			}
 
-			// Save button visibility toggle.
-			property Windows::UI::Xaml::Visibility SaveButtonVisibility {
-				Windows::UI::Xaml::Visibility get();
-				void set(Windows::UI::Xaml::Visibility value);
-			}
-
-			// Convert button visibility toggle.
-			property Windows::UI::Xaml::Visibility ConvertButtonVisibility {
-				Windows::UI::Xaml::Visibility get();
-				void set(Windows::UI::Xaml::Visibility value);
+			// Save button enable toggle.
+			property bool SaveButtonIsEnabled
+			{
+				bool get();
+				void set(bool value);
 			}
 			
 			// Commands.
@@ -110,8 +105,7 @@ namespace ViewModel {
 			StorageFile^ SelectedImageFile;
 			BitmapImage^ m_OriginalImageSource;
 			bool m_ConvertButtonIsEnabled;
-			Windows::UI::Xaml::Visibility m_SaveButtonVisibility;
-			Windows::UI::Xaml::Visibility m_ConvertButtonVisibility;
+			bool m_SaveButtonIsEnabled;
 
 			// Convert image.
 			void ConvertPicture(Platform::Object^ parameter);
