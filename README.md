@@ -1,5 +1,5 @@
 # Grayscale Converter
-A simple color-to-grayscale UWP C++ application.
+A simple color-to-grayscale UWP C++ application with Fluent Design.
 
 ## Screenshot
 ![Screenshot](https://github.com/MateiRadu/grayscale-converter/blob/master/Screenshots/W10.png)
