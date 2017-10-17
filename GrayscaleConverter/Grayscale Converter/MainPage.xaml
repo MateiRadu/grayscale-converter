@@ -49,40 +49,33 @@
                        Margin="12,8,0,0"/>
         </Grid>
         <!-- Header -->
-        <StackPanel x:Name="spHeader"
-                    Background="Transparent"
-                    Height="48"
+        <CommandBar x:Name="spHeader"
+                    Background="Transparent" 
+                    IsOpen="False"
                     Margin="-16,0,-16,0"
-                    Orientation="Horizontal"
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
                     RelativePanel.Below="AppTitleBar">
-            <Button x:Name="PickerButton"
-                    Content="Select a picture"
-                    Height="48"
-                    Margin="0"
-                    Command="{x:Bind ViewModel.SelectPictureCommand}"/>
-            <Button x:Name="ConvertButton"
-                    Content="Convert"
-                    Height="48"
-                    Margin="0"
-                    IsEnabled="{x:Bind ViewModel.ConvertButtonIsEnabled, Mode=OneWay}"
-                    Visibility="{x:Bind ViewModel.ConvertButtonVisibility, Mode=OneWay}"
-                    Command="{x:Bind ViewModel.ConvertPictureCommand}"/>
-            <Button x:Name="SaveButton"
-                    Content="Save result"
-                    Height="48"
-                    Margin="0"
-                    IsEnabled="True"
-                    Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"
-                    Command="{x:Bind ViewModel.SavePictureCommand}"/>
-            <Button x:Name="Settings"
-                    Content="Settings"
-                    Height="48"
-                    Margin="0"
-                    IsEnabled="True"
-                    Click="Settings_Click"/>
-        </StackPanel>
+            <AppBarButton Icon="OpenFile" 
+                          Label="Select a Picture"
+                          Style="{StaticResource AppBarButtonRevealStyle}"
+                          Command="{x:Bind ViewModel.SelectPictureCommand}"/>
+            <AppBarButton Icon="Sync" 
+                          Label="Convert"
+                          Style="{StaticResource AppBarButtonRevealStyle}"
+                          IsEnabled="{x:Bind ViewModel.ConvertButtonIsEnabled, Mode=OneWay}"
+                          Command="{x:Bind ViewModel.ConvertPictureCommand}"/>
+            <AppBarButton Icon="Save" 
+                          Label="Save result"
+                          Style="{StaticResource AppBarButtonRevealStyle}"
+                          Visibility="{x:Bind ViewModel.SaveButtonVisibility, Mode=OneWay}"
+                          Command="{x:Bind ViewModel.SavePictureCommand}"/>
+            <AppBarSeparator />
+            <AppBarButton Icon="Setting" 
+                          Label="Settings"
+                          Style="{StaticResource AppBarButtonRevealStyle}"
+                          Click="Settings_Click"/>
+        </CommandBar>
         <!-- Images -->
         <Grid RelativePanel.Below="spHeader"
               RelativePanel.Above="StatusLabelStack"
