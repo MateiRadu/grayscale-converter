@@ -47,8 +47,73 @@
                        Style="{StaticResource CaptionTextBlockStyle}" 
                        Margin="60,8,0,0"/>
         </Grid>
-        <TextBlock RelativePanel.AlignLeftWithPanel="True"
-                   RelativePanel.Below="AppTitleBar"
-                   Text="Settings"/>
+        <ScrollViewer RelativePanel.AlignLeftWithPanel="True"
+                      RelativePanel.AlignRightWithPanel="True"
+                      RelativePanel.AlignBottomWithPanel="True"
+                      RelativePanel.Below="AppTitleBar">
+            <StackPanel>
+                <StackPanel x:Name="SettingsContent"
+                            Margin="16,16,16,48">
+                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}"
+                               Text="Settings"/>
+                </StackPanel>
+                <StackPanel x:Name="AboutContent"
+                            Margin="16">
+                    <TextBlock Style="{StaticResource SubheaderTextBlockStyle}"
+                               Margin="0,0,0,12"
+                               Text="About"/>
+                    <TextBlock Style="{StaticResource BaseTextBlockStyle}"
+                               Margin="0,0,0,12"
+                               Text="Version 1.0.0.0" />
+                    <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                               Margin="0,0,0,12"
+                               Text="© 2016, 2017 Matei Bogdan Radu" />
+                    <RichTextBlock MaxWidth="640"
+                                   Margin="0,0,0,16"
+                                   HorizontalAlignment="Left">
+                        <Paragraph FontSize="12"
+                                   Margin="0,0,0,8">
+                            This program is free software : you can redistribute it and / or modify it under the terms of 
+                            the GNU General Public License as published by the Free Software Foundation, either version 3 
+                            of the License, or (at your option) any later version.
+                        </Paragraph>
+                        <Paragraph FontSize="12"
+                                   Margin="0,0,0,8">
+                            This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+                            without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See 
+                            the GNU General Public License for more details.
+                        </Paragraph>
+                        <Paragraph FontSize="12"
+                                   Margin="0,0,0,8">
+                            You should have received a copy of the GNU General Public License along with this program. If 
+                            not, see
+                            <Hyperlink NavigateUri="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</Hyperlink>.
+                        </Paragraph>
+                    </RichTextBlock>
+                    <TextBlock Style="{StaticResource BaseTextBlockStyle}"
+                               Margin="0,0,0,12"
+                               Text="Online Content"/>
+                    <HyperlinkButton Margin="0,0,0,12"
+                                     NavigateUri="https://github.com/mateiradu/grayscale-converter"
+                                     Content="Source code repository on GitHub">
+                        <HyperlinkButton.ContentTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </HyperlinkButton.ContentTemplate>
+                    </HyperlinkButton>
+                    <HyperlinkButton Margin="0,0,0,12"
+                                     NavigateUri="https://github.com/mateiradu/"
+                                     Content="Author profile on GitHub">
+                        <HyperlinkButton.ContentTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" />
+                            </DataTemplate>
+                        </HyperlinkButton.ContentTemplate>
+                    </HyperlinkButton>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
     </RelativePanel>
 </Page>
