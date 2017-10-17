@@ -30,6 +30,9 @@ Settings::Settings()
 {
 	InitializeComponent();
 	this->NavigationCacheMode = Navigation::NavigationCacheMode::Enabled;
+
+	auto titleBar = Windows::UI::ViewManagement::ApplicationView::GetForCurrentView()->TitleBar;
+	Window::Current->SetTitleBar(AppTitleBar);
 }
 
 void Settings::OnNavigatedTo(NavigationEventArgs^ e)

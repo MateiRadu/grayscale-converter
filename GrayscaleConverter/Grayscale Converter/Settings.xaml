@@ -27,7 +27,28 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="Settings"/>
-    </Grid>
+    <RelativePanel Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}">
+        <Grid x:Name="AppTitleBar"
+              Height="32"
+              Background="Transparent"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.AlignTopWithPanel="True">
+            <!-- Width of the padding columns is set in LayoutMetricsChanged handler. -->
+            <!-- Using padding columns instead of Margin ensures that the background
+                 paints the area under the caption control buttons (for transparent buttons). -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
+                <ColumnDefinition/>
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Grayscale Converter" 
+                       Grid.Column="1" 
+                       Style="{StaticResource CaptionTextBlockStyle}" 
+                       Margin="60,8,0,0"/>
+        </Grid>
+        <TextBlock RelativePanel.AlignLeftWithPanel="True"
+                   RelativePanel.Below="AppTitleBar"
+                   Text="Settings"/>
+    </RelativePanel>
 </Page>

@@ -46,7 +46,7 @@
             <TextBlock Text="Grayscale Converter" 
                        Grid.Column="1" 
                        Style="{StaticResource CaptionTextBlockStyle}" 
-                       Margin="8,8,0,0"/>
+                       Margin="12,8,0,0"/>
         </Grid>
         <!-- Header -->
         <StackPanel x:Name="spHeader"
