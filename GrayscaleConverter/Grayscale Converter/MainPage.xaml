@@ -26,17 +26,37 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    <RelativePanel Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}"
                    Padding="16">
+        <Grid x:Name="AppTitleBar"
+              Height="32"
+              Background="Transparent"
+              Margin="-16,-16,-16,0"
+              RelativePanel.AlignLeftWithPanel="True"
+              RelativePanel.AlignRightWithPanel="True"
+              RelativePanel.AlignTopWithPanel="True">
+            <!-- Width of the padding columns is set in LayoutMetricsChanged handler. -->
+            <!-- Using padding columns instead of Margin ensures that the background
+                 paints the area under the caption control buttons (for transparent buttons). -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LeftPaddingColumn" Width="0"/>
+                <ColumnDefinition/>
+                <ColumnDefinition x:Name="RightPaddingColumn" Width="0"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Grayscale Converter" 
+                       Grid.Column="1" 
+                       Style="{StaticResource CaptionTextBlockStyle}" 
+                       Margin="8,8,0,0"/>
+        </Grid>
         <!-- Header -->
         <StackPanel x:Name="spHeader"
-                    Background="{ThemeResource AppBarBackground}"
+                    Background="Transparent"
                     Height="48"
-                    Margin="-16,-16,-16,0"
+                    Margin="-16,0,-16,0"
                     Orientation="Horizontal"
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
-                    RelativePanel.AlignTopWithPanel="True">
+                    RelativePanel.Below="AppTitleBar">
             <Button x:Name="PickerButton"
                     Content="Select a picture"
                     Height="48"

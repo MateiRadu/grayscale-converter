@@ -29,6 +29,9 @@ MainPage::MainPage()
 	InitializeComponent();
 	this->NavigationCacheMode = Navigation::NavigationCacheMode::Enabled;
 	ViewModel = ref new MainViewModel();
+
+	auto titleBar = Windows::UI::ViewManagement::ApplicationView::GetForCurrentView()->TitleBar;
+	Window::Current->SetTitleBar(AppTitleBar);
 }
 
 void Grayscale_Converter::MainPage::Settings_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)

@@ -23,4 +23,18 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Grayscale_Converter">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="CustomAppBarButtonHoverBackgroundBrush" Color="#2B888888"/>
+                    <SolidColorBrush x:Key="CustomAppBarButtonPressedBackgroundBrush" Color="#7C888888"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="CustomAppBarButtonHoverBackgroundBrush" Color="#2B888888"/>
+                    <SolidColorBrush x:Key="CustomAppBarButtonPressedBackgroundBrush" Color="#7C888888"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

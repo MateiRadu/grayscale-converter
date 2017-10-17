@@ -115,6 +115,16 @@ void App::OnLaunched(Windows::ApplicationModel::Activation::LaunchActivatedEvent
             Window::Current->Activate();
         }
     }
+
+	// Custom title bar
+	Windows::ApplicationModel::Core::CoreApplication::GetCurrentView()->TitleBar->ExtendViewIntoTitleBar = true;
+	auto titleBar = Windows::UI::ViewManagement::ApplicationView::GetForCurrentView()->TitleBar;
+	Windows::UI::Xaml::Media::SolidColorBrush^ hoverColor = static_cast<Windows::UI::Xaml::Media::SolidColorBrush^>(App::Application::Resources->Lookup("CustomAppBarButtonHoverBackgroundBrush"));
+	Windows::UI::Xaml::Media::SolidColorBrush^ pressedColor = static_cast<Windows::UI::Xaml::Media::SolidColorBrush^>(App::Application::Resources->Lookup("CustomAppBarButtonPressedBackgroundBrush"));
+	titleBar->ButtonBackgroundColor = Windows::UI::Colors::Transparent;
+	titleBar->ButtonInactiveBackgroundColor = Windows::UI::Colors::Transparent;
+	titleBar->ButtonHoverBackgroundColor = hoverColor->Color;
+	titleBar->ButtonPressedBackgroundColor = pressedColor->Color;
 }
 
 /// <summary>
