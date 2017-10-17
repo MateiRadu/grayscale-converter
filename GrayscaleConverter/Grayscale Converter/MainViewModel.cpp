@@ -25,13 +25,12 @@
 #include "FileUtil.h"
 #include <chrono>
 
+using namespace Grayscale_Converter;
 using namespace concurrency;
 using namespace Microsoft::WRL;
-using namespace ViewModel;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Media::Imaging;
 using namespace Windows::Graphics::Imaging;
-using namespace Delegate;
 using namespace Windows::Storage;
 using namespace Windows::Storage::Pickers;
 using namespace Windows::Storage::Streams;

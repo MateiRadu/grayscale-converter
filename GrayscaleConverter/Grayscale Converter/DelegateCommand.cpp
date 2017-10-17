@@ -21,8 +21,7 @@
 #include "pch.h"
 #include "DelegateCommand.h"
 
-
-using namespace Delegate;
+using namespace Grayscale_Converter;
 
 DelegateCommand::DelegateCommand(ExecuteDelegate^ execute, CanExecuteDelegate^ canExecute)
 	: executeDelegate(execute), canExecuteDelegate(canExecute)

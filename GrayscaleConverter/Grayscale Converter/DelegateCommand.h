@@ -25,7 +25,8 @@ using namespace Windows::UI::Xaml;
 using namespace Windows::UI::Xaml::Data;
 using namespace Windows::UI::Xaml::Input;
 
-namespace Delegate {
+namespace Grayscale_Converter
+{
 
 	public delegate void ExecuteDelegate(Platform::Object^ parameter);
 	public delegate bool CanExecuteDelegate(Platform::Object^ parameter);

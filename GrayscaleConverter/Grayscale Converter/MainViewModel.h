@@ -26,7 +26,7 @@ using namespace Windows::UI::Xaml::Data;
 using namespace Windows::Storage;
 using namespace Windows::UI::Xaml::Media::Imaging;
 
-namespace ViewModel {
+namespace Grayscale_Converter {
 
 	// Different status message foreground color codes.
 	public enum class NotifyType

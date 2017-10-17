@@ -24,8 +24,6 @@
 #include "MainViewModel.h"
 #include "Settings.xaml.h"
 
-using namespace ViewModel;
-
 namespace Grayscale_Converter
 {
 
